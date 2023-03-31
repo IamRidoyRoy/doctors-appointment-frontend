@@ -6,12 +6,13 @@ const Banner = () => {
         // This is homepage banner 
 
         <div className="hero  bg-base-200" >
-            <div className="hero-content flex-col lg:flex-row-reverse px-12 " style={{
-                backgroundImage: `url(${bannerImage})`,
-                backgroundSize: 'cover',
-                opacity: .8,
-
-            }}>
+            <div className="hero-content flex-col lg:flex-row-reverse px-12 "
+            // style={{
+            //     backgroundImage: `url(${bannerImage})`,
+            //     backgroundSize: 'cover',
+            //     opacity: .8,
+            // }}
+            >
                 <img src={bannerImage} className=" w-1/2 rounded-lg shadow-2xl" alt='' />
                 <div>
                     <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>
@@ -19,7 +20,7 @@ const Banner = () => {
                     <button className="bannerbtn btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">Get Started</button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
