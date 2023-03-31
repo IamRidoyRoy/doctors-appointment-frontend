@@ -8,7 +8,7 @@ const Footer = () => {
         <section>
             <footer className="footer p-10 "
                 style={{
-                    background: `url(${footer})`,
+                    backgroundImage: `url(${footer})`,
                     backgroundSize: 'cover'
                 }}
             >

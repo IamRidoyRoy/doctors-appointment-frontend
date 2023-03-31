@@ -1,3 +1,4 @@
+import Appointment from "../Pages/AppointmentPage/Appointment"
 import Home from "../Pages/Home/Home"
 import Login from "../Pages/Login/Login"
 
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/appointment',
+                element: <Appointment></Appointment>
             }
         ]
     }

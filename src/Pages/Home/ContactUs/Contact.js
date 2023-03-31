@@ -13,7 +13,6 @@ const Contact = () => {
         >
             <h3 className='text-primary text-xl '>Contact Us</h3>
             <h1 className='text-4xl text-white mb-10'>Stay connected with us</h1>
-
             <form action="">
                 <input type="text " placeholder="Email Address" className="input w-full max-w-xs mb-5" /><br />
                 <input type="text" placeholder="Subject" className="input w-full max-w-xs mb-5" /> <br />
