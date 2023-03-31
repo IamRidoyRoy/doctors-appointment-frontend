@@ -5,8 +5,13 @@ const Banner = () => {
     return (
         // This is homepage banner 
 
-        <div className="hero  bg-base-200">
-            <div className="hero-content flex-col lg:flex-row-reverse px-12">
+        <div className="hero  bg-base-200" >
+            <div className="hero-content flex-col lg:flex-row-reverse px-12 " style={{
+                backgroundImage: `url(${bannerImage})`,
+                backgroundSize: 'cover',
+                opacity: .8,
+
+            }}>
                 <img src={bannerImage} className=" w-1/2 rounded-lg shadow-2xl" alt='' />
                 <div>
                     <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>
