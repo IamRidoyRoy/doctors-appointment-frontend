@@ -1,5 +1,6 @@
 import React from 'react';
 import bannerImage from '../../../assets/images/chair.png'
+import bg from '../../../assets/images/bg.png'
 import './Banner.css';
 import PrimaryButton from '../../../components/PrimaryButton';
 const Banner = () => {
@@ -8,11 +9,11 @@ const Banner = () => {
 
         <div className="hero  bg-base-200" >
             <div className="hero-content flex-col lg:flex-row-reverse px-12 "
-            // style={{
-            //     backgroundImage: `url(${bannerImage})`,
-            //     backgroundSize: 'cover',
-            //     opacity: .8,
-            // }}
+                style={{
+                    backgroundImage: `url(${bg})`,
+                    backgroundSize: 'cover',
+
+                }}
             >
                 <img src={bannerImage} className=" w-1/2 rounded-lg shadow-2xl" alt='' />
                 <div>
