@@ -29,10 +29,10 @@ const Services = () => {
         },
     ]
     return (
-        <div className='mt-16'>
+        <div className='mt-16 '>
             <h3 className='flex justify-center open-sans text-xl text-primary mt-32'>OUR SERVICES</h3>
             <h1 className='flex justify-center open-sans text-4xl'>Services We Provide</h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 '>
                 {
                     servicesData.map((service) => <Service key={service} service={service}></Service>)
                 }
