@@ -3,11 +3,9 @@ import chair from '../../../assets/images/chair.png'
 import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 
-const AptBanner = () => {
-    const [selected, setSelected] = useState(new Date());
+const AptBanner = ({ selected, setSelected }) => {
 
     return (
-
         <header>
             <div className="hero ">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-x-28">
@@ -22,8 +20,6 @@ const AptBanner = () => {
                     </div>
                 </div>
             </div>
-
-
         </header>
     );
 };
