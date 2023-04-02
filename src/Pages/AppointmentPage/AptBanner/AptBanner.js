@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import chair from '../../../assets/images/chair.png'
+import { DayPicker } from 'react-day-picker';
+import { format } from 'date-fns';
 
 const AptBanner = () => {
+    const [selected, setSelected] = useState(new Date());
+
     return (
+
         <header>
-            <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero ">
+                <div className="hero-content flex-col lg:flex-row-reverse gap-x-28">
                     <img src={chair} alt='chair' className="max-w-sm rounded-lg shadow-2xl" />
                     <div>
-                        <h1 className="text-5xl font-bold">Box Office News!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <button className="btn btn-primary">Get Started</button>
+                        <DayPicker
+                            mode="single"
+                            selected={selected}
+                            onSelect={setSelected}
+                        ></DayPicker>
+                        <p>You picked {format(selected, 'PP')}.</p>
                     </div>
                 </div>
             </div>
+
+
         </header>
     );
 };
