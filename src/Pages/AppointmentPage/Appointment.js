@@ -5,8 +5,14 @@ import AptOptions from './AptOptions/AptOptions';
 import BookingModal from './BookingModal/BookingModal';
 
 const Appointment = () => {
+    // This state for selecting date 
     const [selected, setSelected] = useState(new Date());
 
+    // to get and set modal data 
+
+    const [treatment, setTreatment] = useState(null);
+
+    // This state for booking name , slots options 
     const [options, setOptions] = useState([]);
     console.log(options)
     useEffect(() => {
@@ -20,11 +26,15 @@ const Appointment = () => {
             <AvailableServices selected={selected}></AvailableServices>
             <div className='lg:mx-14 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 '>
                 {
-                    options.map((option) => <AptOptions key={option._id} option={option}></AptOptions>
+                    options.map((option) => <AptOptions setTreatment={setTreatment} key={option._id} option={option}></AptOptions>
                     )
                 }
             </div>
-            <BookingModal></BookingModal>
+            {
+                treatment &&
+                <BookingModal treatment={treatment}></BookingModal>
+            }
+
         </div>
 
     );
