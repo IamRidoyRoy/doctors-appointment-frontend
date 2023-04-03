@@ -1,6 +1,4 @@
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
-import AptOptions from '../AptOptions/AptOptions';
 
 const AvailableServices = ({ selected }) => {
 

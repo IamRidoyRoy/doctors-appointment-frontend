@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AptBanner from './AptBanner/AptBanner';
 import AvailableServices from './AvailableServices/AvailableServices';
 import AptOptions from './AptOptions/AptOptions';
+import BookingModal from './BookingModal/BookingModal';
 
 const Appointment = () => {
     const [selected, setSelected] = useState(new Date());
@@ -23,6 +24,7 @@ const Appointment = () => {
                     )
                 }
             </div>
+            <BookingModal></BookingModal>
         </div>
 
     );
