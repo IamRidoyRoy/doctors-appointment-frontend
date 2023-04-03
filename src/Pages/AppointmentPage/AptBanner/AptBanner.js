@@ -7,7 +7,7 @@ const AptBanner = ({ selected, setSelected }) => {
 
     return (
         <header>
-            <div className="hero ">
+            <div className=" ">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-x-28">
                     <img src={chair} alt='chair' className="max-w-sm rounded-lg shadow-2xl" />
                     <div>
