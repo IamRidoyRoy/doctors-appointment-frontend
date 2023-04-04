@@ -32,7 +32,7 @@ const Appointment = () => {
             </div>
             {
                 treatment &&
-                <BookingModal treatment={treatment}></BookingModal>
+                <BookingModal selected={selected} treatment={treatment}></BookingModal>
             }
 
         </div>
