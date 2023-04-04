@@ -11,7 +11,9 @@ const AptOptions = ({ option, setTreatment }) => {
                 <p>{slots.length} {slots.length > 1 ? "spaces available" : 'space available'}!</p>
                 <div className="card-actions justify-center">
                     {/* <button className="btn btn-primary text-white">Book Now</button> */}
-                    <label onClick={() => setTreatment(option)} htmlFor="booking-modal" className="btn btn-primary text-white">Book Now</label>
+                    <label
+                        disabled={slots.length == 0}
+                        onClick={() => setTreatment(option)} htmlFor="booking-modal" className="btn btn-primary text-white">Book Now</label>
 
                 </div>
             </div>
