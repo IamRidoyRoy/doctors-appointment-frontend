@@ -12,7 +12,7 @@ const AptOptions = ({ option, setTreatment }) => {
                 <div className="card-actions justify-center">
                     {/* <button className="btn btn-primary text-white">Book Now</button> */}
                     <label
-                        disabled={slots.length == 0}
+                        disabled={slots.length === 0}
                         onClick={() => setTreatment(option)} htmlFor="booking-modal" className="btn btn-primary text-white">Book Now</label>
 
                 </div>
