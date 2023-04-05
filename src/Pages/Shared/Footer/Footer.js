@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import footer from '../../../assets/images/footer.png'
-import PrimaryButton from '../../../components/PrimaryButton';
 
 const Footer = () => {
     return (
