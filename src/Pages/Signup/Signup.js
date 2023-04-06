@@ -34,11 +34,13 @@ const Signup = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" {...register("password", {
+
                             required: 'Password is required',
-                            minLength: { value: 6, message: "Password must be 6 character or longer" }
+                            minLength: { value: 6, message: "Password must be 6 character or longer" },
+                            pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: 'Password must be strong' },
+
                         })} className="input input-bordered w-full" />
                         {errors.password && <span className='text-red-600'>{errors.password.message}</span>}
-                        {/* {errors.message && <span className='text-red-600'>Password is required</span>} */}
 
                         <label className="label">
                             <span className="label-text"> Forgot Password ?</span>
@@ -58,3 +60,5 @@ const Signup = () => {
 };
 
 export default Signup;
+
+
