@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -6,14 +6,23 @@ import { AuthContext } from '../../contexts/AuthProvider';
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signIn } = useContext(AuthContext);
+
+    // show login error  
+    const [loginError, setLoginError] = useState('');
+
     const handleForm = (data) => {
         console.log(data)
+        setLoginError('');
         signIn(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                setLoginError(error.message)
+
+            })
 
     }
     return (
@@ -45,6 +54,12 @@ const Login = () => {
                     </label>
                     <button className='btn btn-accent my-2.5 w-full' value={Login} type='submit'>Login</button>
                 </form>
+
+                {/* set login error  */}
+                <div>
+                    {loginError && <p className='text-center text-red-600'>{loginError}</p>}
+                </div>
+
                 <p className='text-center'>New to Doctors Portal? <Link to='/signup' className='text-secondary'>Create new account</Link></p>
 
                 <div className="flex flex-col w-full border-opacity-50">
