@@ -1,22 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUser } = useContext(AuthContext)
+    const [signUpErr, setSignupErr] = useState('');
 
 
     const handleForm = (data) => {
-        console.log(data)
+        setSignupErr('');
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user
-                console.log(user);
+                toast('User Create Successfully!')
+                // get user info 
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(err => console.log(err))
+
             })
             .catch(error => {
-                console.log(error.message)
+                setSignupErr(error.message)
 
             })
     }
@@ -27,7 +37,6 @@ const Signup = () => {
 
                 <div className='w-96 p-4'>
                     <h1 className='text-4xl text-center font-bold'>Sign Up</h1> <br />
-
                     {/* Handle the form  */}
                     <form
                         onSubmit={handleSubmit(handleForm)}>
@@ -59,6 +68,10 @@ const Signup = () => {
                         </label>
                         <button className='btn btn-accent my-2.5 w-full' value={Signup} type='submit'>Sign Up</button>
                     </form>
+
+                    {
+                        signUpErr && <p className='text-red-600'>{signUpErr}</p>
+                    }
 
                     <p className='text-center'>Already have an account? <Link to='/login' className='text-secondary'>Login</Link></p>
 
