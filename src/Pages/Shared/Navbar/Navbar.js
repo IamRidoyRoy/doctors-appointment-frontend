@@ -10,18 +10,25 @@ const Navbar = () => {
         logOut()
             .then(() => { })
             .catch((error) => console.log(error))
-
     }
-    const menuItems = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/appointment'>Appoinment</Link></li>
-        <li><Link to='/reviews'>Reviews</Link></li>
-        <li><Link to='/contact'>Constact Us</Link></li>
-        {user?.uid ?
-            <li><button onClick={handleSignOut} href="">Sign Out</button></li>
-            : <li><Link to='/login' href="">Log in</Link></li>}
-    </>
+    const menuItems =
+        <>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/about'>About</Link></li>
+            <li><Link to='/appointment'>Appoinment</Link></li>
+            <li><Link to='/reviews'>Reviews</Link></li>
+            <li><Link to='/contact'>Constact Us</Link></li>
+
+            {/* If the user is logged in he/she wil see the dashboard */}
+            {user?.uid ?
+                <>
+                    <li><Link to='/dashboard'>Dashboard</Link></li>
+
+                    <li><button onClick={handleSignOut} href="">Sign Out</button></li>
+                </>
+                : <li><Link to='/login' href="">Log in</Link></li>
+            }
+        </>
     return (
         <div className="navbar bg-base-100 flex justify-between">
             <div className="navbar-start">
