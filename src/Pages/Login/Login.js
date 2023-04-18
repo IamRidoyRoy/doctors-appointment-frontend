@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
@@ -10,6 +10,11 @@ const Login = () => {
     // show login error  
     const [loginError, setLoginError] = useState('');
 
+    // To make private route 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from.pathname || '/';
+
     const handleForm = (data) => {
         console.log(data)
         setLoginError('');
@@ -17,6 +22,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.log(error)
@@ -25,6 +31,8 @@ const Login = () => {
             })
 
     }
+
+
     return (
         <div className='h-[480px] flex justify-center items-center m-12'>
 

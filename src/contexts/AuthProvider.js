@@ -9,6 +9,8 @@ const auth = getAuth(app);
 
 
 const AuthProvider = ({ children }) => {
+
+    const [loading, setLoading] = useState(true);
     // create new user 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -17,6 +19,7 @@ const AuthProvider = ({ children }) => {
     // to observe the currentUser 
     const [user, setUser] = useState(null);
     useEffect(() => {
+        setLoading(true);
         const ussubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('We are observing the current user');
             setUser(currentUser);
@@ -27,6 +30,7 @@ const AuthProvider = ({ children }) => {
 
     // SignIn with email and password
     const signIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     }
 
@@ -46,7 +50,8 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut,
         user,
-        updateUser
+        updateUser,
+        loading
     }
     return (
         <AuthContext.Provider value={authInfo}>
