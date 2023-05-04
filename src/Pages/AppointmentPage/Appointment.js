@@ -16,7 +16,7 @@ const Appointment = () => {
     const date = format(selected, 'PP');
 
     // Fetching api data using react query - async await 
-    const { data: slots = [] } = useQuery({
+    const { data: slots = [], refetch } = useQuery({
         queryKey: ['slots', date],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/time-slots?date=${date}`);
@@ -38,7 +38,7 @@ const Appointment = () => {
             </div>
             {
                 treatment &&
-                <BookingModal selected={selected} treatment={treatment} setTreatment={setTreatment}></BookingModal>
+                <BookingModal selected={selected} treatment={treatment} setTreatment={setTreatment} refetch={refetch}></BookingModal>
             }
 
         </div>
