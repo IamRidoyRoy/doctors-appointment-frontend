@@ -13,23 +13,26 @@ const Appointment = () => {
 
     const [treatment, setTreatment] = useState(null);
 
-    // This state for booking name , slots options 
-    // const [options, setOptions] = useState([]);
-
 
     // Fetching api data using react query 
+    // const { data: slots = [] } = useQuery({
+    //     queryKey: ['slots'],
+    //     queryFn: () => fetch('http://localhost:5000/time-slots')
+    //         .then(res => res.json())
+    // })
+
+    // Fetching api data using react query - async await 
+
     const { data: slots = [] } = useQuery({
         queryKey: ['slots'],
-        queryFn: () => fetch('http://localhost:5000/time-slots')
-            .then(res => res.json())
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/time-slots');
+            const data = res.json();
+            return data;
+        }
     })
-    console.log(slots)
 
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/time-slots')
-    //         .then(res => res.json())
-    //         .then(data => setOptions(data))
-    // }, [])
+
     return (
         <div className='mx-5'>
             <AptBanner selected={selected} setSelected={setSelected}></AptBanner>
