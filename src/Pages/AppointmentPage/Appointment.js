@@ -5,6 +5,7 @@ import AptOptions from './AptOptions/AptOptions';
 import BookingModal from './BookingModal/BookingModal';
 import { useQuery } from 'react-query';
 import { format } from 'date-fns';
+import Loading from '../Shared/Loading/Loading';
 
 const Appointment = () => {
     // This state for selecting date 
@@ -16,7 +17,7 @@ const Appointment = () => {
     const date = format(selected, 'PP');
 
     // Fetching api data using react query - async await 
-    const { data: slots = [], refetch } = useQuery({
+    const { data: slots = [], refetch, isLoading } = useQuery({
         queryKey: ['slots', date],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/time-slots?date=${date}`);
@@ -25,6 +26,11 @@ const Appointment = () => {
         }
     })
 
+    // To Show loading spinner! 
+    // if (isLoading) {
+    //     return < Loading />
+
+    // }
 
     return (
         <div className='mx-5'>
