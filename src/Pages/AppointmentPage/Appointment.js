@@ -4,29 +4,22 @@ import AvailableServices from './AvailableServices/AvailableServices';
 import AptOptions from './AptOptions/AptOptions';
 import BookingModal from './BookingModal/BookingModal';
 import { useQuery } from 'react-query';
+import { format } from 'date-fns';
 
 const Appointment = () => {
     // This state for selecting date 
     const [selected, setSelected] = useState(new Date());
 
     // to get and set modal data 
-
     const [treatment, setTreatment] = useState(null);
 
-
-    // Fetching api data using react query 
-    // const { data: slots = [] } = useQuery({
-    //     queryKey: ['slots'],
-    //     queryFn: () => fetch('http://localhost:5000/time-slots')
-    //         .then(res => res.json())
-    // })
+    const date = format(selected, 'PP');
 
     // Fetching api data using react query - async await 
-
     const { data: slots = [] } = useQuery({
-        queryKey: ['slots'],
+        queryKey: ['slots', date],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/time-slots');
+            const res = await fetch(`http://localhost:5000/time-slots?date=${date}`);
             const data = res.json();
             return data;
         }
