@@ -1,3 +1,4 @@
+import DashboardLayout from "../Layout/DashboardLayout"
 import Appointment from "../Pages/AppointmentPage/Appointment"
 import Dashboard from "../Pages/Dashboard/Dashboard"
 import Home from "../Pages/Home/Home"
@@ -30,9 +31,17 @@ export const router = createBrowserRouter([
                 path: '/appointment',
                 element: <Appointment></Appointment>
             },
+
+        ]
+    },
+
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
             {
                 path: '/dashboard',
-                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+                element: <Dashboard></Dashboard>
             }
         ]
     }
