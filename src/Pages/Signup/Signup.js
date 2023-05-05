@@ -15,14 +15,14 @@ const Signup = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                toast('User Create Successfully!')
+                toast.success('User Create Successfully!')
                 // get user info 
                 const userInfo = {
                     displayName: data.name
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        navigate('/')
+                        saveUser(data.name, data.email)
                     })
                     .catch(err => console.log(err))
 
@@ -31,6 +31,25 @@ const Signup = () => {
                 setSignupErr(error.message)
 
             })
+
+
+        // TO save user info in database
+        const saveUser = (name, email) => {
+            const user = { name, email };
+            fetch('http://localhost:5000/users ', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('save User:', data)
+                    navigate('/');
+                })
+
+        }
     }
 
     return (
@@ -46,7 +65,7 @@ const Signup = () => {
                             <span className="label-text">Name</span>
                         </label>
                         <input type="name" {...register("name", { required: true })} className="input input-bordered w-full " />
-                        {errors.email && <span className='text-red-600'>Name is required</span>}
+                        {errors.name && <span className='text-red-600'>Name is required</span>}
 
                         <label className="label">
                             <span className="label-text">Email</span>
@@ -60,7 +79,7 @@ const Signup = () => {
 
                             required: 'Password is required',
                             minLength: { value: 6, message: "Password must be 6 character or longer" },
-                            pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: 'Password must have Uppercase, Number & Special Character' },
+                            // pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: 'Password must have Uppercase, Number & Special Character' },
 
                         })} className="input input-bordered w-full" />
                         {errors.password && <span className='text-red-600'>{errors.password.message}</span>}

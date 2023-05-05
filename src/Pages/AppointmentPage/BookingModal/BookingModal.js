@@ -65,7 +65,7 @@ const BookingModal = ({ treatment, selected, setTreatment, refetch }) => {
                             }
                         </select>
                         <input name='name' type="name" defaultValue={user?.displayName} placeholder="Your Name" className=" h-12 input input-bordered w-full max-w-xs" />
-                        <input name='email' type="email" disabled defaultValue={user?.email} placeholder="Email Address" className=" h-12 input input-bordered w-full max-w-xs" />
+                        <input name='email' type="email" defaultValue={user?.email} disabled placeholder="Email Address" className=" h-12 input input-bordered w-full max-w-xs" />
                         <input name='phone' type="phone" placeholder="Phone number" className=" h-12 input input-bordered w-full max-w-xs" />
                         <button className='btn btn-accent w-full max-w-xs' type='submit'>Submit</button>
                     </form>
