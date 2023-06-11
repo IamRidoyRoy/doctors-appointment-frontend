@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import app from '../../firebase/firebase.config';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -32,6 +34,20 @@ const Login = () => {
 
     }
 
+    // Google Sign in 
+    const auth = getAuth(app)
+    const provider = new GoogleAuthProvider();
+    const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+    .then(result => {
+    const user = result.user;
+    console.log(user);
+    })
+    .catch(error => {
+    console.log('error', error)
+    })
+    }
+    
 
     return (
         <div className='h-[480px] flex justify-center items-center m-12'>
@@ -73,7 +89,7 @@ const Login = () => {
                 <div className="flex flex-col w-full border-opacity-50">
                     <div className="divider">OR</div>
                 </div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
