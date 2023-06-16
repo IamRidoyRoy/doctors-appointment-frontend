@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 import useToken from "../../hooks/useToken";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import app from "../../firebase/firebase.config";
 
 const Signup = () => {
   const {
@@ -62,6 +64,60 @@ const Signup = () => {
     };
   };
 
+  // Google Sign up/ Sign in
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const handleGoogleSignIn = (data) => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        const email = user.email;
+        const name = user.displayName;
+        saveUser(name, email);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
+    setSignupErr("");
+
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("User Create Successfully!");
+        // get user info
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateUser(userInfo)
+          .then(() => {
+            saveUser(data.name, data.email);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((error) => {
+        setSignupErr(error.message);
+      });
+
+    // TO save user info in database
+    const saveUser = (name, email) => {
+      const user = { name, email };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("save User:", data);
+          setCreateUserEmail(email);
+        });
+    };
+  };
   return (
     <div>
       <div className="h-[480px] flex justify-center items-center m-12 ">
@@ -132,7 +188,10 @@ const Signup = () => {
           <div className="flex flex-col w-full border-opacity-50">
             <div className="divider">OR</div>
           </div>
-          <button className="btn btn-outline w-full">
+          <button
+            onClick={handleGoogleSignIn}
+            className="btn btn-outline w-full"
+          >
             CONTINUE WITH GOOGLE
           </button>
         </div>
