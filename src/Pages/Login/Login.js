@@ -4,18 +4,29 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signIn } = useContext(AuthContext);
-
-    // show login error  
-    const [loginError, setLoginError] = useState('');
-
+ 
     // To make private route 
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from.pathname || '/';
+
+    //   Verift sign in with jwt
+    const [siginWithEmail, setSiginWithEmail] = useState('');
+    const [token] = useToken(siginWithEmail);
+
+    if(token){
+        navigate(from, { replace: true })
+        }
+
+    // show login error  
+    const [loginError, setLoginError] = useState('');
+
+    
 
     const handleForm = (data) => {
         console.log(data)
@@ -24,7 +35,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                navigate(from, { replace: true })
+                setSiginWithEmail(data.email)
             })
             .catch(error => {
                 console.log(error)
